@@ -2,6 +2,7 @@ package movie.demo.mapper
 
 import movie.demo.dto.MovieDTO
 import movie.demo.entity.Movie
+import movie.demo.web.rest.CreateMovieCommand
 import org.springframework.stereotype.Service
 
 @Service

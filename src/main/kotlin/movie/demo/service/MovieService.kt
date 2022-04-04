@@ -1,8 +1,9 @@
 package movie.demo.service
 
 import movie.demo.dto.MovieDTO
+import movie.demo.web.rest.CreateMovieCommand
 
 interface MovieService {
     fun getMovies() : List<MovieDTO>
-    fun createMovie(movieDTO: MovieDTO): Int
+    fun createMovie(createMovieCommand: CreateMovieCommand): MovieDTO
 }

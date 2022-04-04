@@ -6,9 +6,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import movie.demo.dto.MovieDTO
 import movie.demo.exception.MovieException
 import movie.demo.service.MovieService
+import movie.demo.shared.toLocation
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.net.URI
+
 
 @RestController
 @RequestMapping("/api/movies")
@@ -24,16 +25,16 @@ class MovieResource(
     @GetMapping
     fun getMovies() : ResponseEntity<List<MovieDTO>> = ResponseEntity.ok(_movieService.getMovies())
 
-    @Operation(summary = "Sets a price for a chosen car", description = "Returns 202 if successful")
+    @Operation(summary = "Creates a movie rating", description = "Returns 201 if successful")
     @ApiResponses(
         value = [
-            ApiResponse(responseCode = "202", description = "Successful Operation"),
-            ApiResponse(responseCode = "404", description = "Such a car does not exist"),
+            ApiResponse(responseCode = "201", description = "Successful Operation"),
+            ApiResponse(responseCode = "401", description = "Invalid movie model"),
         ]
     )
     @PostMapping
-    fun createMovie(@RequestBody movieDTO: MovieDTO) : ResponseEntity<MovieDTO>{
-        var id = _movieService.createMovie(movieDTO)
-        return ResponseEntity.created(URI.create(id.toString())).body(movieDTO)
+    fun createMovie(@RequestBody cmd: CreateMovieCommand) : ResponseEntity<MovieDTO>{
+        val dto = _movieService.createMovie(cmd)
+        return ResponseEntity.created(dto.id.toLocation()).body(dto)
     }
 }

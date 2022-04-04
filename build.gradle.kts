@@ -17,6 +17,7 @@ repositories {
 }
 
 dependencies {
+	implementation("com.google.code.gson:gson:2.8.6")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springdoc:springdoc-openapi-data-rest:1.6.6")
@@ -26,6 +27,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	runtimeOnly("com.h2database:h2")
+	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

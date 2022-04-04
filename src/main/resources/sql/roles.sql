@@ -1,2 +1,2 @@
-CREATE ROLE movie_dev_rw WITH LOGIN PASSWORD 'dev_database_passwd';
+CREATE ROLE postgres WITH LOGIN PASSWORD 'password1';
 GRANT ALL PRIVILEGES ON DATABASE movie_db TO movie_dev_rw;

@@ -22,5 +22,6 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ./src/main/resources/sql/databases.sql:/docker-entrypoint-initdb.d/1-dev-database.sql
-      - ./src/main/resources/sql/roles.sql:/docker-entrypoint-initdb.d/2-dev-roles.sql
+#      - ./src/main/resources/sql/database.sql:/docker-entrypoint-initdb.d/1-dev-database.sql
+#      - ./src/main/resources/sql/roles.sql:/docker-entrypoint-initdb.d/2-dev-roles.sql
+      - ./src/main/resources/sql/schema.sql:/docker-entrypoint-initdb.d/3-dev-schema.sql

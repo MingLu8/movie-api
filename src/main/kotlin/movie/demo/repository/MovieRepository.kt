@@ -13,4 +13,5 @@ interface MovieRepository: CrudRepository<Movie, Int> {
 
     @Query("SELECT m FROM Movie as m")
     fun getAllMovies(): List<Movie>
+
 }

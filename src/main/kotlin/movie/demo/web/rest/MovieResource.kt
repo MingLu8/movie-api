@@ -7,18 +7,21 @@ import movie.demo.dto.MovieDTO
 import movie.demo.exception.MovieException
 import movie.demo.service.MovieService
 import movie.demo.shared.toLocation
+import org.springdoc.api.OpenApiResourceNotFoundException
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
-
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/api/movies")
 class MovieResource(
     private val _movieService : MovieService
 ) {
-    @GetMapping("{id:Int}")
-    fun getMovieById(id:Int) : ResponseEntity<MovieDTO>{
-        throw MovieException("Not Implemented. $id")
+    @GetMapping("{id}")
+    fun getMovieById(@PathVariable id:Int) : ResponseEntity<MovieDTO>{
+        val movie = _movieService.getMovieById(id) ?: throw OpenApiResourceNotFoundException("Movie not found for Id: $id.")
+        return ResponseEntity.ok(movie)
     }
 
 

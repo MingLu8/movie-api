@@ -1,6 +1,7 @@
 package movie.demo.web.rest
 
 import movie.demo.dto.MovieDTO
+import movie.demo.exception.MovieException
 import movie.demo.service.MovieService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -15,6 +16,12 @@ import java.net.URI
 class MovieResource(
     private val _movieService : MovieService
 ) {
+    @GetMapping("{id:Int}")
+    fun getMovieById(id:Int) : ResponseEntity<MovieDTO>{
+        throw MovieException("Not Implemented. $id")
+    }
+
+
     @GetMapping
     fun getMovies() : ResponseEntity<List<MovieDTO>> = ResponseEntity.ok(_movieService.getMovies())
 

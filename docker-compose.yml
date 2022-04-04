@@ -1,13 +1,26 @@
-# -------------------------- DEPENDENCIES ------------------
-postgres: &POSTGRES
-  image: postgres:10.4
-# ------------------------- DEV ----------------------------
-postgres-dev:
-  <<: *POSTGRES
-  ports:
-    - 5432:5432
-  volumes:
-    - ./src/main/resources/sql/databases.sql:/docker-entrypoint-initdb.d/1-dev-database.sql
-    - ./src/main/resources/sql/roles.sql:/docker-entrypoint-initdb.d/2-dev-roles.sql
-
 # run this in terminal:  docker-compose up postgres-dev
+
+## -------------------------- DEPENDENCIES ------------------
+#postgres: &POSTGRES
+#  image: postgres:10.4
+## ------------------------- DEV ----------------------------
+#postgres-dev:
+#  <<: *POSTGRES
+#  ports:
+#    - 5432:5432
+#  volumes:
+#    - ./src/main/resources/sql/databases.sql:/docker-entrypoint-initdb.d/1-dev-database.sql
+#    - ./src/main/resources/sql/roles.sql:/docker-entrypoint-initdb.d/2-dev-roles.sql
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: password1
+      POSTGRES_USER: postgres
+      POSTGRES_DB: movie_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./src/main/resources/sql/databases.sql:/docker-entrypoint-initdb.d/1-dev-database.sql
+      - ./src/main/resources/sql/roles.sql:/docker-entrypoint-initdb.d/2-dev-roles.sql

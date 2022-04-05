@@ -40,4 +40,16 @@ class MovieResource(
         val dto = _movieService.createMovie(cmd)
         return ResponseEntity.created(dto.id.toLocation()).body(dto)
     }
+
+    @PutMapping("{id}")
+    fun createMovie(@PathVariable id:Int, @RequestBody cmd: UpdateMovieCommand) : ResponseEntity<MovieDTO>{
+        val dto = _movieService.updateMovie(id, cmd)
+        return ResponseEntity.accepted().body(dto)
+    }
+
+    @DeleteMapping("{id}")
+    fun deleteMovie(@PathVariable id:Int) : ResponseEntity<String?>{
+        _movieService.deleteMovie(id)
+        return ResponseEntity.ok().body(null)
+    }
 }

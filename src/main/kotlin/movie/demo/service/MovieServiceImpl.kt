@@ -5,6 +5,8 @@ import movie.demo.entity.Movie
 import movie.demo.mapper.MovieMapper
 import movie.demo.repository.MovieRepository
 import movie.demo.web.rest.CreateMovieCommand
+import movie.demo.web.rest.UpdateMovieCommand
+import org.springdoc.api.OpenApiResourceNotFoundException
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.stereotype.Service
 import java.sql.ResultSet
@@ -34,9 +36,28 @@ class MovieServiceImpl(
         return _movieMapper.fromEntity(movie)
     }
 
-    override fun getMovieById(id:Int): MovieDTO? {
+    override fun updateMovie(id: Int, cmd: UpdateMovieCommand): MovieDTO?{
+        val movieOption = _movieRepository.findById(id)
+        val movie = movieOption.orElseThrow{OpenApiResourceNotFoundException("Update movie failed, movie not found for id: $id.")}
+        movie.name = cmd.name
+        movie.rating = cmd.rating
+        _movieRepository.save(movie)
+        return _movieMapper.fromEntity(movie)
+    }
+
+    fun getMovieById2(id:Int): MovieDTO? {
         val movies = _db.query("Select * from Movie where id=?", arrayOf(id), MovieRowMapper())
         if(!movies.any()) return null
         return _movieMapper.fromEntity(movies.first())
+    }
+
+    override fun getMovieById(id:Int): MovieDTO? {
+        val movie = _movieRepository.findById(id)
+        if(movie.isEmpty) return null
+        return _movieMapper.fromEntity(movie.get())
+    }
+
+    override fun deleteMovie(id: Int): Unit{
+        _movieRepository.deleteById(id)
     }
 }

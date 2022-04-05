@@ -17,7 +17,8 @@ repositories {
 }
 
 dependencies {
-	implementation("com.google.code.gson:gson:2.8.6")
+	implementation("io.github.microutils:kotlin-logging-jvm:2.1.21")
+	implementation("com.google.code.gson:gson:2.9.0")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springdoc:springdoc-openapi-data-rest:1.6.6")

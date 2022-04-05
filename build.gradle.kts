@@ -27,9 +27,14 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("org.postgresql:postgresql")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.amshove.kluent:kluent:1.68")
+	testImplementation("org.spekframework.spek2:spek-dsl-jvm:2.0.18")
+	testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:2.0.18")
 }
 
 tasks.withType<KotlinCompile> {
@@ -40,5 +45,7 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<Test> {
-	useJUnitPlatform()
+	useJUnitPlatform{
+		includeEngines("spek2")
+	}
 }

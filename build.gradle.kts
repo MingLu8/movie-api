@@ -34,7 +34,16 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.amshove.kluent:kluent:1.68")
 	testImplementation("org.spekframework.spek2:spek-dsl-jvm:2.0.18")
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+		exclude(module = "mockito-core")
+	}
+	testImplementation("org.springframework.security:spring-security-test")
+	testImplementation("com.ninja-squad:springmockk:3.1.1")
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+
 	testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:2.0.18")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
 }
 
 tasks.withType<KotlinCompile> {

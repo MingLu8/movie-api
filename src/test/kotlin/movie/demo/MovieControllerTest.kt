@@ -6,6 +6,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import movie.demo.dto.MovieDTO
+import movie.demo.repository.MovieRepository
 import movie.demo.service.MovieService
 import movie.demo.web.rest.MovieResource
 import org.junit.jupiter.api.Test
@@ -26,7 +27,10 @@ import java.security.Principal
 @AutoConfigureMockMvc(addFilters = false)
 internal class MovieControllerTest {
     @MockkBean
-    lateinit var mockMovieService: MovieService
+    lateinit var movieService: MovieService
+
+    @MockkBean
+    lateinit var movieRepository: MovieRepository
 
     @Autowired
     private lateinit var mockMvc: MockMvc
@@ -42,25 +46,25 @@ internal class MovieControllerTest {
         val expectedMovie = MovieDTO(3, "movie@example.com", 5.0)
         val objectMapper = ObjectMapper()
         val movieInfoJSON = objectMapper.writeValueAsString(expectedMovie)
-        every { mockMovieService.getMovieById(3) } returns expectedMovie
+        every { movieService.getMovieById(3) } returns expectedMovie
 
         performMe()
             .andExpect(status().isOk)
             .andExpect(content().json(movieInfoJSON))
             .andReturn()
 
-        verify { mockMovieService.getMovieById(3) }
+        verify { movieService.getMovieById(3) }
     }
 
     @Test
     fun `when the movie does not exist, there is a not found error`() {
-        every { mockMovieService.getMovieById(3) } returns null
+        every { movieService.getMovieById(3) } returns null
 
         performMe()
             .andExpect(status().isNotFound)
             .andReturn()
 
-        every { mockMovieService.getMovieById(3) }
+        every { movieService.getMovieById(3) }
     }
 
     private fun performMe() =

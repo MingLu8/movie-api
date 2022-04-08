@@ -16,17 +16,17 @@ import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
 class InMemorySecurityConfiguration {
-//    @Bean
-//    fun filterChain(http: HttpSecurity): SecurityFilterChain {
-//        http.authorizeRequests()
-//            .antMatchers("/css/**").permitAll()
-//            .antMatchers("/user/**").hasAuthority("ROLE_USER")
-//            .antMatchers("/api/**").hasAuthority("ROLE_USER")
+    @Bean
+    fun filterChain(http: HttpSecurity): SecurityFilterChain {
+        http.authorizeRequests()
+            .antMatchers("/css/**").permitAll()
+            .antMatchers("/user/**").hasAuthority("ROLE_USER")
+            .antMatchers("/api/**").hasAuthority("ROLE_USER")
 //            .antMatchers("/swagger-ui/**").hasAuthority("ROLE_USER")
-////            .and()
-////            .formLogin().loginPage("login")
-//        return http.build()
-//    }
+            .and()
+            .formLogin()
+        return http.build()
+    }
 
     @Bean
     fun userDetailsService(): UserDetailsService {

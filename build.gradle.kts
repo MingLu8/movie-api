@@ -19,6 +19,10 @@ repositories {
 }
 
 dependencies {
+	implementation("org.springframework.security.oauth:spring-security-oauth2:2.4.2.RELEASE")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+//	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
 	implementation("io.github.microutils:kotlin-logging-jvm:2.1.21")
 	implementation("com.google.code.gson:gson:2.9.0")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -45,6 +49,7 @@ dependencies {
 //		exclude(module = "junit")
 	}
 
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("com.ninja-squad:springmockk:3.1.1")
 	testImplementation("org.junit.jupiter:junit-jupiter-api")

@@ -58,6 +58,9 @@ class MovieServiceImpl(
     }
 
     override fun deleteMovie(id: Int): Unit{
-        _movieRepository.deleteById(id)
+        _movieRepository.findById(id).let{
+            if(!it.isEmpty)
+                _movieRepository.deleteById(id)
+        }
     }
 }

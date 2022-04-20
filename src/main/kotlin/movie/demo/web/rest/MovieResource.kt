@@ -4,22 +4,30 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import movie.demo.dto.MovieDTO
-import movie.demo.exception.MovieException
+import movie.demo.security.AuthenticationService
 import movie.demo.service.MovieService
 import movie.demo.shared.toLocation
 import org.springdoc.api.OpenApiResourceNotFoundException
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException
+import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import javax.servlet.http.HttpServletRequest
 
 @CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/api/movies")
 class MovieResource(
-    private val _movieService : MovieService
+    private val _movieService : MovieService,
+    private val _request : HttpServletRequest,
+    private val _authService : AuthenticationService
 ) {
     @GetMapping("{id}")
     fun getMovieById(@PathVariable id:Int) : ResponseEntity<MovieDTO>{
+
+        //1. validate auth token
+        val oAuthToken: String = _request.getHeader(HttpHeaders.AUTHORIZATION)
+        _authService.validateAuthorisation(oAuthToken)
+
         val movie = _movieService.getMovieById(id) ?: throw OpenApiResourceNotFoundException("Movie not found for Id: $id.")
         return ResponseEntity.ok(movie)
     }

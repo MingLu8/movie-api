@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.security.oauth:spring-security-oauth2:2.4.2.RELEASE")
+	implementation("org.springframework.security.oauth:spring-security-oauth2:2.5.1.RELEASE")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 //	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
@@ -28,12 +28,13 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-mustache")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springdoc:springdoc-openapi-data-rest:1.6.6")
-	implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
-	implementation("org.springdoc:springdoc-openapi-kotlin:1.6.6")
+	implementation("org.springdoc:springdoc-openapi-data-rest:1.6.7")
+	implementation("org.springdoc:springdoc-openapi-ui:1.6.7")
+	implementation("org.springdoc:springdoc-openapi-kotlin:1.6.7")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("com.auth0:java-jwt:3.19.1")
 
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("org.postgresql:postgresql")

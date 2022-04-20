@@ -20,7 +20,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: movie_db
     ports:
-      - '5432:5432'
+      - '5433:5433'
     volumes:
 #      - ./src/main/resources/sql/database.sql:/docker-entrypoint-initdb.d/1-dev-database.sql
 #      - ./src/main/resources/sql/roles.sql:/docker-entrypoint-initdb.d/2-dev-roles.sql
